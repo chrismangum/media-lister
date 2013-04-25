@@ -1,11 +1,7 @@
 <?php
-	function split_last_section($string, $delim, $extract = false) {
-		$arr = explode($delim, $string);
-		if ($extract) {
-			return $arr[count($arr) - 1];
-		} else {
-			return implode($delim, array_slice($arr, 0, count($arr) - 1)) . $delim;
-		}
+	function get_ext($path) {
+		$path_info = pathinfo($path);
+		return $path_info['extension']; 
 	}
 	function get_contents($dir, $top_level = false) {
 		$ls = scandir($_SERVER['DOCUMENT_ROOT'] . $dir);
@@ -19,7 +15,7 @@
 			$web_path = $dir . $name;
 			$abs_path = $_SERVER['DOCUMENT_ROOT'] . $web_path;
 			if (filetype($abs_path) === 'file') {
-				$class = split_last_section($name, '.', true);
+				$class = get_ext($abs_path);
 			} else {
 				$class = 'dir';
 			}
@@ -75,9 +71,9 @@
 	<body>
 		<?php
 			echo $directory_links . '<hr />';
-			get_contents(split_last_section($_SERVER['SCRIPT_NAME'], '/'), true);
+			get_contents(dirname($_SERVER['SCRIPT_NAME']) . '/', true);
 		?>
-		<script src="/tv/jQuery.js"></script>
+		<script src="jQuery.js"></script>
 		<script>
 			$(function () {
 				$(document.body).on('click', 'a.dir', function () {
