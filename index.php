@@ -42,7 +42,7 @@
 		global $current_dir;
 		$string = '/'; $output_arr = array();
 		$path = explode('/', $_SERVER['SCRIPT_NAME']);
-		array_shift($path); array_pop($path);
+		array_pop($path); array_shift($path);
 		foreach ($path as $dir) {
 			$string .= $dir . '/';
 			$output_arr[] = '<a href="' . $string . '">' . $dir . '</a>';
