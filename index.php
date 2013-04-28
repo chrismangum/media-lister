@@ -20,11 +20,9 @@
 			$web_path = $dir . $name;
 			echo "<li>"; 
 			if (filetype($item) === "file") {
-				$class = get_ext($item);
-				echo "<img width='30' height='1' src='/dev/media_lister/images/s.gif' /><a class='$class' href='$web_path'>$name</a>";
+				echo "<img width='30' height='1' src='/dev/media_lister/images/s.gif' /><a class='".get_ext($item)."' href='$web_path'>$name</a>";
 			} else {
-				echo "<img class='dir' src='/dev/media_lister/images/arrow_r.png' />";
-				echo "<a href='$web_path'>$name</a>";
+				echo "<img class='dir' src='/dev/media_lister/images/arrow_r.png' /><a href='$web_path'>$name</a>";
 				get_contents($web_path . "/");
 			}
 			echo "</li>";
