@@ -66,7 +66,7 @@
 			echo $directory_links . "<hr />";
 			get_contents(dirname($_SERVER["SCRIPT_NAME"]) . "/", true);
 		?>
-		<script src="/tv/jQuery.js"></script>
+		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		<script>
 			(function () {
 				function mod_src(o, n, that) {
