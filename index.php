@@ -11,6 +11,7 @@
 			echo '<ul style="display: none;">';
 		}
 		for ($i = 2, $max = count($ls); $i < $max; $i += 1) {
+			$echo = false;
 			$name = $ls[$i];
 			$web_path = $dir . $name;
 			$abs_path = $_SERVER['DOCUMENT_ROOT'] . $web_path;
@@ -20,6 +21,7 @@
 				$class = 'dir';
 			}
 			if ($class === 'dir' || $class === 'mp4' || $class === 'm4v') {
+				$echo = true;
 				echo '<li>'; 
 				if ($class === 'dir') {
 					echo '<a class="dir" href="' . $web_path . '"><img src="/dev/media_lister/images/arrow_r.png" /></a>';
@@ -30,7 +32,7 @@
 			}
 			if ($class === 'dir') {
 				get_contents($web_path . '/');
-			} else {
+			} elseif ($echo) {
 				echo '</li>';
 			}
 		}
@@ -75,14 +77,14 @@
 		?>
 		<script src="jQuery.js"></script>
 		<script>
-			$(function () {
+			(function () {
+				function mod_src(o, n, that) {
+					that.setAttribute('src', that.getAttribute('src').replace(o, n));
+				}
 				$(document.body).on('click', 'a.dir', function () {
 					var $_this = $(this),
 						arrow = $_this.children()[0],
 						$_sib_ul = $_this.siblings('ul');
-					function mod_src(o, n, that) {
-						that.setAttribute('src', that.getAttribute('src').replace(o, n));
-					}
 					if ($_sib_ul.children().length) {
 						if ($_sib_ul.is(':visible')) {
 							$_sib_ul.hide();
@@ -94,7 +96,7 @@
 						return false;
 					}
 				});
-			});
+			}());
 		</script>
 	</body>
 </html>
