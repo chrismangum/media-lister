@@ -10,6 +10,7 @@
 			glob($search_base . "*.mp4", GLOB_NOSORT),
 			glob($search_base . "*.m4v", GLOB_NOSORT)
 		);
+		sort($ls);	
 		if ($top_level) {
 			echo "<ul>";
 		} else {
