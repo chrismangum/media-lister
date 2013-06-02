@@ -4,7 +4,7 @@
 		return $path_info["extension"]; 
 	}
 	function get_contents($dir, $top_level = false) {
-		$search_base = $_SERVER["DOCUMENT_ROOT"] . $dir;
+		$search_base = preg_replace('/(\*|\?|\[)/', '[$1]', $_SERVER["DOCUMENT_ROOT"] . $dir);
 		$ls = array_merge(
 			glob($search_base . "*", GLOB_ONLYDIR),
 			glob($search_base . "*.mp4", GLOB_NOSORT),
