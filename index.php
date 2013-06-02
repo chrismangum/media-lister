@@ -69,7 +69,7 @@
 		?>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
 		<script>
-			(function () {
+			(function ($) {
 				function mod_src(o, n, that) {
 					that.setAttribute("src", that.getAttribute("src").replace(o, n));
 				}
@@ -84,7 +84,7 @@
 						mod_src("_r", "_d", this);
 					}
 				});
-			}());
+			}(jQuery));
 		</script>
 	</body>
 </html>
