@@ -4,7 +4,7 @@
         return $path_info["extension"]; 
     }
     function get_contents($dir, $top_level = false) {
-        $search_base = preg_replace('/(\*|\?|\[)/', '[$1]', $_SERVER["DOCUMENT_ROOT"] . $dir);
+        $search_base = preg_replace("/(\*|\?|\[)/", "[$1]", $_SERVER["DOCUMENT_ROOT"] . $dir);
         $ls = array_merge(
             glob($search_base . "*", GLOB_ONLYDIR),
             glob($search_base . "*.mp4", GLOB_NOSORT),
@@ -14,16 +14,16 @@
         if ($top_level) {
             echo "<ul>";
         } else {
-            echo "<ul style='display: none;'>";
+            echo "<ul style=\"display: none;\">";
         }
         foreach ($ls as $item) {
             $name = basename($item);
             $web_path = $dir . $name;
             echo "<li>"; 
             if (filetype($item) === "file") {
-                echo "<img width='30' height='1' src='/dev/media_lister/images/s.gif' /><a class='".get_ext($item)."' href='$web_path'>$name</a>";
+                echo "<img width=\"30\" height=\"1\" src=\"/images/s.gif\" /><a class=\"".get_ext($item)."\" href=\"$web_path\">$name</a>";
             } else {
-                echo "<img class='dir' src='/dev/media_lister/images/arrow_r.png' /><a href='$web_path'>$name</a>";
+                echo "<img class=\"dir\" src=\"/images/arrow_r.png\" /><a href=\"$web_path\">$name</a>";
                 get_contents($web_path . "/");
             }
             echo "</li>";
@@ -37,7 +37,7 @@
         $path = array_slice($path, 1, -1);
         foreach ($path as $dir) {
             $string .= $dir . "/";
-            $output_arr[] = "<a href='$string'>$dir</a>";
+            $output_arr[] = "<a href=\"$string\">$dir</a>";
         }
         $current_dir = array_pop($path);
         return implode("&nbsp;&nbsp;<span>&gt;</span>&nbsp;&nbsp;", $output_arr);
