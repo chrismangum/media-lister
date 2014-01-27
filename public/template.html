@@ -3,7 +3,7 @@
 <script type="text/ng-template" id="item.html">
   <li ng-repeat="file in files" ng-init="show = false">
     <a ng-click="show = !show"><img ng-if="file.type === 'directory'" ng-src="/static/images/arrow_{{show && 'd' || 'r'}}.png" /></a>
-    <a ng-href="{{currDir + '/' + file.name}}">{{file.name}}</a>
+    <a ng-href="{{file.type === 'file' && '/target' || ''}}{{currDir + '/' + file.name}}">{{file.name}}</a>
     <ul ng-if="file.children.length" ng-show="show" ng-include="'item.html'" ng-init="files = file.children; currDir = currDir + '/' + file.name"></ul>
   </li>
 </script>
