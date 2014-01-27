@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html ng-app="app">
+  <head>
+    <title></title>
+    <meta charset="utf-8" />
+    <style>
+      body { font-family: Helvetica, sans-serif; line-height: 1.7em; background-color: #333; color: #fff;}
+      ul {padding-left: 30px;}
+      li { list-style-type: none; }
+      img.dir { padding: 0 10px; cursor: pointer; }
+      span { color: #f00; }
+      a { text-decoration: none; color: #fff; }
+      a:hover { text-decoration: underline; }
+      a:visited { color: #fff; }
+      a.mp4:visited, a.m4v:visited { color: #888; }
+    </style>
+  </head>
+  <body ng-controller="mainCtrl">
+    <div ng-view></div>
+    <script src="/static/vendor/jquery/jquery.min.js"></script>
+    <script src="/static/vendor/angular/angular.js"></script>
+    <script src="/static/vendor/angular-route/angular-route.js"></script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>

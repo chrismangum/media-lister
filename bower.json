@@ -1,0 +1,22 @@
+{
+  "name": "media_lister",
+  "version": "0.0.0",
+  "homepage": "https://github.com/mtdbass5/media_lister",
+  "authors": [
+    "Chris Mangum <mtdbass5@gmail.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "angular": "~1.2.10",
+    "jquery": "~2.1.0",
+    "underscore": "~1.5.2",
+    "angular-route": "~1.2.10"
+  }
+}
