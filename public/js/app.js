@@ -15,6 +15,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 app.controller('tmpCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
   var url = '/dir';
   $scope.currDir = '';
+  $scope.breadcrumbs = '';
   if ($routeParams.dir) {
     url += '/' + $routeParams.dir;
     $scope.currDir += '/' + $routeParams.dir;
