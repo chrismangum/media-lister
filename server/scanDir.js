@@ -1,6 +1,4 @@
 var fs = require('fs'),
-  async = require('async'),
-  path = require('path'),
   _ = require('underscore');
 
 var ftypes = {
@@ -15,10 +13,6 @@ function getFtype(mode) {
   return ftypes[mode.toString(8).slice(0, 2)];
 }
 
-function getPath() {
-  return path.join(process.cwd(), pathPrefix) + '/';
-}
-
 function scanDir(path) {
   var items = {};
   _.each(fs.readdirSync(path), function (item) {
@@ -28,8 +22,7 @@ function scanDir(path) {
       if (stat.type === 'directory') {
         stat.children = scanDir(path + item + '/');
       }
-      stat = _.pick(stat, 'type', 'children');
-      items[item] = stat;
+      items[item] = _.pick(stat, 'type', 'children');
     }
   });
   return items;

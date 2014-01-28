@@ -5,29 +5,20 @@ var express = require('express'),
   scanDir = require('./scanDir'),
   app = express();
 
+var target;
+process.chdir(path.join(__dirname, '../target'));
+target = process.cwd();
+process.chdir(__dirname);
+
 app.use(express.logger('dev'));
-
-function getTargetDir() {
-  var targetDir;
-  process.chdir(path.join(__dirname, '../target'));
-  targetDir = process.cwd();
-  process.chdir(__dirname);
-  return targetDir;
-}
-
-function dirReq(req, res) {
-  var dir = req.params[0] || '',
-    fullPath = path.join(__dirname, '../target/' + dir);
-  res.send({
-    target: getTargetDir(),
-    files: scanDir.scan(fullPath)
-  });
-}
-
 app.use('/static', express.static(path.join(__dirname, '../public')));
-app.use('/target', express.static(path.join(__dirname, '../target')));
-app.get('/dir/*', dirReq);
-app.get('/dir', dirReq);
+app.use('/target', express.static(target));
+app.get('/dir', function (req, res) {
+  res.send({
+    target: target,
+    files: scanDir.scan(target + '/')
+  });
+});
 app.get('*', function (req, res) {
   res.sendfile(path.join(__dirname, "../public/index.html"));
 });
