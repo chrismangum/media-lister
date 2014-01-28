@@ -15,10 +15,7 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 app.controller('tmpCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
   function getDirFiles(files) {
     _.each($scope.breadcrumbs, function (item, i) {
-      files = files[item];
-      if (files.children) {
-        files = files.children;
-      }
+      files = files[item].children;
     });
     return files;
   }
