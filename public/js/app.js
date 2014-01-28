@@ -18,6 +18,7 @@ app.controller('tmpCtrl', ['$scope', '$http', '$routeParams', function ($scope, 
   if ($routeParams.dir) {
     url += '/' + $routeParams.dir;
     $scope.currDir += '/' + $routeParams.dir;
+    $scope.breadcrumbs = $routeParams.dir.split('/');
   }
   $http.get(url).success(function (data) {
     $scope.files = data.files;

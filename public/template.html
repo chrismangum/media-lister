@@ -1,3 +1,11 @@
+<ul class="breadcrumbs">
+  <li><a href="/">video</a></li>
+  <li ng-repeat="bc in breadcrumbs">
+    <span>&nbsp;&raquo; </span>
+    <a ng-href="#/{{breadcrumbs.slice(0, $index + 1).join('/')}}">{{bc}}</a>
+  <li>
+</ul>
+<hr>
 <ul ng-include="'item.html'"></ul>
 
 <script type="text/ng-template" id="item.html">
