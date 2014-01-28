@@ -20,7 +20,7 @@ app.controller('tmpCtrl', ['$scope', '$http', '$routeParams', function ($scope, 
       window.location.href = '/' + $routeParams.dir;
     }
     url += '/' + $routeParams.dir;
-    $scope.currDir += $routeParams.dir;
+    $scope.currDir += '/' + $routeParams.dir;
   }
   $http.get(url).success(function (data) {
     $scope.files = data.files;
