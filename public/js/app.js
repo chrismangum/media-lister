@@ -10,7 +10,6 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
       templateUrl: '/static/template.html',
       controller: 'tmpCtrl'
     });
-  $locationProvider.html5Mode(true);
 }]);
 
 app.controller('tmpCtrl', ['$scope', '$http', '$routeParams', function ($scope, $http, $routeParams) {
