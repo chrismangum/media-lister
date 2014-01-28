@@ -1,5 +1,5 @@
 <ul class="breadcrumbs">
-  <li><a href="/">video</a></li>
+  <li><a href="/">{{target}}</a></li>
   <li ng-repeat="bc in breadcrumbs">
     <span>&nbsp;&raquo; </span>
     <a ng-href="#/{{breadcrumbs.slice(0, $index + 1).join('/')}}">{{bc}}</a>

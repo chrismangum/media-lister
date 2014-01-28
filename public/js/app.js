@@ -23,6 +23,7 @@ app.controller('tmpCtrl', ['$scope', '$http', '$routeParams', function ($scope, 
   }
   $http.get(url).success(function (data) {
     $scope.files = data.files;
+    $scope.target = data.target.split('/').pop();
   });
 }]);
 

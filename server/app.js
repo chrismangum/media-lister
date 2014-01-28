@@ -7,10 +7,19 @@ var express = require('express'),
 
 app.use(express.logger('dev'));
 
+function getTargetDir() {
+  var targetDir;
+  process.chdir(path.join(__dirname, '../target'));
+  targetDir = process.cwd();
+  process.chdir(__dirname);
+  return targetDir;
+}
+
 function dirReq(req, res) {
   var dir = req.params[0] || '',
     fullPath = path.join(__dirname, '../target/' + dir);
   res.send({
+    target: getTargetDir(),
     files: scanDir.scan(fullPath)
   });
 }
