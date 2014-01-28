@@ -16,9 +16,6 @@ app.controller('tmpCtrl', ['$scope', '$http', '$routeParams', function ($scope, 
   var url = '/dir';
   $scope.currDir = '';
   if ($routeParams.dir) {
-    if ($routeParams.dir.indexOf('target') === 0) {
-      window.location.href = '/' + $routeParams.dir;
-    }
     url += '/' + $routeParams.dir;
     $scope.currDir += '/' + $routeParams.dir;
   }
