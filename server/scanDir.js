@@ -20,19 +20,20 @@ function getPath() {
 }
 
 function scanDir(path) {
-  path += '/';
-  return _.compact(_.map(fs.readdirSync(path), function (item) {
+  var items = {};
+  _.each(fs.readdirSync(path), function (item) {
     if (ignored.indexOf(item) === -1) {
       var stat = fs.statSync(path + item);
-      stat.name = item;
       stat.type = getFtype(stat.mode);
       if (stat.type === 'directory') {
-        stat.children = scanDir(path + item);
+        stat.children = scanDir(path + item + '/');
       }
-      return _.pick(stat, 'type', 'name', 'children');
+      stat = _.pick(stat, 'type', 'children');
+      items[item] = stat;
     }
-  }));
-};
+  });
+  return items;
+}
 
 exports.scan = scanDir;
 
