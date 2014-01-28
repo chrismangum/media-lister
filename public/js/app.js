@@ -13,40 +13,44 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 }]);
 
 app.controller('tmpCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
-  function getDirFiles(files) {
-    _.each($scope.breadcrumbs, function (item, i) {
-      files = files[item].children;
-    });
-    return files;
-  }
-  function updateDirFiles() {
-    if ($routeParams.dir) {
-      $scope.currDir += '/' + $routeParams.dir;
-      $scope.breadcrumbs = $routeParams.dir.split('/');
-    }
-    $scope.dirFiles = getDirFiles($scope.files);
-  }
-  if ($scope.files) {
-    updateDirFiles();
+  if ($scope.data) {
+    $scope.updatePathVars($routeParams);
   } else {
-    $scope.$on('update', function () {
-      updateDirFiles();
+    $scope.$on('data', function () {
+      $scope.updatePathVars($routeParams);
       $scope.$apply();
     });
   }
 }]);
 
-app.controller('mainCtrl', ['$scope', '$httpBackend', '$routeParams', function ($scope, $httpBackend, $routeParams) {
+app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBackend) {
   $scope.target = '';
+  $scope.data = '';
   $scope.files = '';
-  $scope.dirFiles = '';
   $scope.currDir = '';
   $scope.breadcrumbs = [];
 
+  function getFiles(files) {
+    _.each($scope.breadcrumbs, function (item, i) {
+      files = files[item].children;
+    });
+    return files;
+  }
+
+  $scope.updatePathVars = function (rParams) {
+    $scope.breadcrumbs = [];
+    $scope.currDir = '';
+    if (rParams.dir) {
+      $scope.currDir = '/' + rParams.dir;
+      $scope.breadcrumbs = rParams.dir.split('/');
+    }
+    $scope.files = getFiles($scope.data);
+  }
+
   $httpBackend('GET', '/dir', null, function (status, data) {
     data = angular.fromJson(data);
-    $scope.files = data.files;
+    $scope.data = data.files;
     $scope.target = data.target.split('/').pop();
-    $scope.$broadcast('update');
+    $scope.$broadcast('data');
   });
 }]);
