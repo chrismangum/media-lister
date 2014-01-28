@@ -14,10 +14,10 @@ app.config(['$routeProvider', '$locationProvider', function ($routeProvider, $lo
 
 app.controller('tmpCtrl', ['$scope', '$routeParams', function ($scope, $routeParams) {
   if ($scope.data) {
-    $scope.updatePathVars($routeParams);
+    $scope.updatePathVars($routeParams.dir);
   } else {
     $scope.$on('data', function () {
-      $scope.updatePathVars($routeParams);
+      $scope.updatePathVars($routeParams.dir);
       $scope.$apply();
     });
   }
@@ -37,12 +37,12 @@ app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBac
     return files;
   }
 
-  $scope.updatePathVars = function (rParams) {
+  $scope.updatePathVars = function (reqPath) {
     $scope.breadcrumbs = [];
     $scope.currDir = '';
-    if (rParams.dir) {
-      $scope.currDir = '/' + rParams.dir;
-      $scope.breadcrumbs = rParams.dir.split('/');
+    if (reqPath) {
+      $scope.currDir = '/' + reqPath;
+      $scope.breadcrumbs = reqPath.split('/');
     }
     $scope.files = getFiles($scope.data);
   }
