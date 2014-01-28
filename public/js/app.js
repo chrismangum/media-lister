@@ -38,11 +38,12 @@ app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBac
   }
 
   $scope.updatePathVars = function (reqPath) {
-    $scope.breadcrumbs = [];
-    $scope.currDir = '';
     if (reqPath) {
       $scope.currDir = '/' + reqPath;
       $scope.breadcrumbs = reqPath.split('/');
+    } else {
+      $scope.breadcrumbs = [];
+      $scope.currDir = '';
     }
     $scope.files = getFiles($scope.data);
   }
