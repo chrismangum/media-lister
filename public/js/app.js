@@ -23,7 +23,7 @@ app.controller('tmpCtrl', ['$scope', '$routeParams', function ($scope, $routePar
   }
 }]);
 
-app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBackend) {
+app.controller('mainCtrl', ['$scope', '_', '$httpBackend', function ($scope, _, $httpBackend) {
   $scope.target = '';
   $scope.data = '';
   $scope.files = '';
@@ -55,3 +55,7 @@ app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBac
     $scope.$broadcast('data');
   });
 }]);
+
+app.factory('_', function() {
+  return _;
+});
