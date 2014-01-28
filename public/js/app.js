@@ -30,8 +30,8 @@ app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBac
   $scope.currDir = '';
   $scope.breadcrumbs = [];
 
-  function getFiles(files) {
-    _.each($scope.breadcrumbs, function (item, i) {
+  function getTargetDirFiles(files) {
+    _.each($scope.breadcrumbs, function (item) {
       files = files[item].children;
     });
     return files;
@@ -45,7 +45,7 @@ app.controller('mainCtrl', ['$scope', '$httpBackend', function ($scope, $httpBac
       $scope.breadcrumbs = [];
       $scope.currDir = '';
     }
-    $scope.files = getFiles($scope.data);
+    $scope.files = getTargetDirFiles($scope.data);
   }
 
   $httpBackend('GET', '/dir', null, function (status, data) {
