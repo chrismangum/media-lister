@@ -4,42 +4,9 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     watch: {
-      stylus: {
-        files: 'public/css/style.styl',
-        tasks: ['stylus:compile']
-      },
-      jade: {
-        files: 'views/*.jade',
-        tasks: ['jade:compile']
-      },
       js: {
         files: 'public/js/app.js',
         tasks: ['uglify']
-      },
-      css: {
-        files: 'public/css/style.css',
-        tasks: ['cssmin']
-      }
-    },
-    cssmin: {
-      compress: {
-        files: {
-          'public/css/style.min.css': ['public/css/style.css']
-        }
-      }
-    },
-    jade: {
-      compile: {
-        files: {
-          "public/index.html": "views/index.jade"
-        }
-      }
-    },
-    stylus: {
-      compile: {
-        files: {
-          "public/css/style.css": "public/css/style.styl"
-        }
       }
     },
     uglify: {
@@ -75,7 +42,7 @@ module.exports = function(grunt) {
       }
     }
   });
-  grunt.registerTask('default', [/*'compile', */'concurrent:default']);
-  grunt.registerTask('compile', ['stylus:compile', 'cssmin:compress', 'jade:compile', 'uglify:minify']);
+  grunt.registerTask('default', ['compile', 'concurrent:default']);
+  grunt.registerTask('compile', ['uglify:minify']);
   grunt.registerTask('lint', ['jshint']);
 };
