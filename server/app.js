@@ -11,10 +11,11 @@ target = process.cwd();
 process.chdir(__dirname);
 
 app.use(express.logger('dev'));
+app.set('json spaces', 0);
 app.use('/static', express.static(path.join(__dirname, '../public')));
 app.use('/target', express.static(target));
 app.get('/dir', function (req, res) {
-  res.send({
+  res.json({
     target: target,
     files: scanDir.scan(target + '/')
   });
