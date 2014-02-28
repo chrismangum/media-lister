@@ -7,6 +7,17 @@ module.exports = function(grunt) {
       js: {
         files: 'public/js/app.js',
         tasks: ['uglify']
+      },
+      coffee: {
+        files: 'public/js/app.coffee',
+        tasks: ['coffee:compile']
+      }
+    },
+    coffee: {
+      compile: {
+        files: {
+          'public/js/app.js': 'public/js/app.coffee',
+        }
       }
     },
     uglify: {
@@ -43,6 +54,6 @@ module.exports = function(grunt) {
     }
   });
   grunt.registerTask('default', ['compile', 'concurrent:default']);
-  grunt.registerTask('compile', ['uglify:minify']);
+  grunt.registerTask('compile', ['uglify:minify', 'coffee:compile']);
   grunt.registerTask('lint', ['jshint']);
 };
