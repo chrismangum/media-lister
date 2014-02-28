@@ -9,36 +9,27 @@ app.config ['$routeProvider', ($routeProvider) ->
     .otherwise routeObj
 ]
 
-app.controller 'tmpCtrl', ['$scope', '$routeParams',
-  ($scope, $routeParams) ->
-    if $scope.data
-      $scope.updatePathVars $routeParams.dir
+app.controller 'tmpCtrl', ['$scope', ($scope) ->
+  if $scope.data
+    $scope.updatePathVars()
+    $scope.files = $scope.parseData($scope.data)
 ]
 
-app.controller 'mainCtrl', ['$scope', '$http',
-  ($scope, $http) ->
-    $scope.target = ''
-    $scope.data = ''
-    $scope.files = ''
-    $scope.currDir = ''
-    $scope.breadcrumbs = []
+app.controller 'mainCtrl', ['$scope', '$http', '$routeParams'
+  ($scope, $http, $rp) ->
 
-    getTargetDirFiles = (files) ->
+    $scope.parseData = (files) ->
       for item in $scope.breadcrumbs
         files = files[item].children
       files
 
-    $scope.updatePathVars = (reqPath) ->
-      if reqPath
-        $scope.currDir = '/' + reqPath
-        $scope.breadcrumbs = reqPath.split '/'
-      else
-        $scope.breadcrumbs = []
-        $scope.currDir = ''
-      $scope.files = getTargetDirFiles $scope.data
+    $scope.updatePathVars = () ->
+      $scope.breadcrumbs = if $rp.dir then $rp.dir.split '/' else []
+      $scope.currDir = if $rp.dir then '/' + $rp.dir else ''
 
     $http.get('/dir').success (data) ->
       $scope.data = data.files
       $scope.target = data.target.split('/').pop()
-      $scope.updatePathVars $routeParams.dir
+      $scope.updatePathVars()
+      $scope.files = $scope.parseData($scope.data)
 ]
