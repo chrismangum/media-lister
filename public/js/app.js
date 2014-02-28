@@ -29,17 +29,21 @@
 
   app.controller('mainCtrl', [
     '$scope', '$httpBackend', function($scope, $httpBackend) {
-      var files, item, _i, _len, _ref;
+      var getTargetDirFiles;
       $scope.target = '';
       $scope.data = '';
       $scope.files = '';
       $scope.currDir = '';
       $scope.breadcrumbs = [];
-      _ref = $scope.breadcrumbs;
-      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
-        item = _ref[_i];
-        files = files[item].children;
-      }
+      getTargetDirFiles = function(files) {
+        var item, _i, _len, _ref;
+        _ref = $scope.breadcrumbs;
+        for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+          item = _ref[_i];
+          files = files[item].children;
+        }
+        return files;
+      };
       $scope.updatePathVars = function(reqPath) {
         if (reqPath) {
           $scope.currDir = '/' + reqPath;

@@ -27,7 +27,9 @@ app.controller 'mainCtrl', ['$scope', '$httpBackend',
     $scope.currDir = ''
     $scope.breadcrumbs = []
 
-    files = files[item].children for item in $scope.breadcrumbs
+    getTargetDirFiles = (files) ->
+      files = files[item].children for item in $scope.breadcrumbs
+      files
 
     $scope.updatePathVars = (reqPath) ->
       if reqPath
@@ -44,7 +46,3 @@ app.controller 'mainCtrl', ['$scope', '$httpBackend',
       $scope.target = data.target.split('/').pop()
       $scope.$broadcast 'data'
 ]
-
-
-
-
