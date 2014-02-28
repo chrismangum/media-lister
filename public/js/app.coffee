@@ -19,18 +19,15 @@ app.controller 'tmpCtrl', ['$scope', '$routeParams',
         $scope.$apply()
 ]
 
-app.controller 'mainCtrl', ['$scope', '_', '$httpBackend',
-  ($scope, _, $httpBackend) ->
+app.controller 'mainCtrl', ['$scope', '$httpBackend',
+  ($scope, $httpBackend) ->
     $scope.target = ''
     $scope.data = ''
     $scope.files = ''
     $scope.currDir = ''
     $scope.breadcrumbs = []
 
-    getTargetDirFiles = (files) ->
-      _.each $scope.breadcrumbs, (item) ->
-        files = files[item].children
-      files
+    files = files[item].children for item in $scope.breadcrumbs
 
     $scope.updatePathVars = (reqPath) ->
       if reqPath
@@ -47,9 +44,6 @@ app.controller 'mainCtrl', ['$scope', '_', '$httpBackend',
       $scope.target = data.target.split('/').pop()
       $scope.$broadcast 'data'
 ]
-
-app.factory '_', ->
-  _
 
 
 

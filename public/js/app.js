@@ -28,19 +28,18 @@
   ]);
 
   app.controller('mainCtrl', [
-    '$scope', '_', '$httpBackend', function($scope, _, $httpBackend) {
-      var getTargetDirFiles;
+    '$scope', '$httpBackend', function($scope, $httpBackend) {
+      var files, item, _i, _len, _ref;
       $scope.target = '';
       $scope.data = '';
       $scope.files = '';
       $scope.currDir = '';
       $scope.breadcrumbs = [];
-      getTargetDirFiles = function(files) {
-        _.each($scope.breadcrumbs, function(item) {
-          return files = files[item].children;
-        });
-        return files;
-      };
+      _ref = $scope.breadcrumbs;
+      for (_i = 0, _len = _ref.length; _i < _len; _i++) {
+        item = _ref[_i];
+        files = files[item].children;
+      }
       $scope.updatePathVars = function(reqPath) {
         if (reqPath) {
           $scope.currDir = '/' + reqPath;
@@ -59,9 +58,5 @@
       });
     }
   ]);
-
-  app.factory('_', function() {
-    return _;
-  });
 
 }).call(this);
