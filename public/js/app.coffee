@@ -28,7 +28,8 @@ app.controller 'mainCtrl', ['$scope', '$httpBackend',
     $scope.breadcrumbs = []
 
     getTargetDirFiles = (files) ->
-      files = files[item].children for item in $scope.breadcrumbs
+      for item in $scope.breadcrumbs
+        files = files[item].children
       files
 
     $scope.updatePathVars = (reqPath) ->
