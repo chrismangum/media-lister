@@ -13,14 +13,10 @@ app.controller 'tmpCtrl', ['$scope', '$routeParams',
   ($scope, $routeParams) ->
     if $scope.data
       $scope.updatePathVars $routeParams.dir
-    else
-      $scope.$on 'data', ->
-        $scope.updatePathVars $routeParams.dir
-        $scope.$apply()
 ]
 
-app.controller 'mainCtrl', ['$scope', '$httpBackend',
-  ($scope, $httpBackend) ->
+app.controller 'mainCtrl', ['$scope', '$http',
+  ($scope, $http) ->
     $scope.target = ''
     $scope.data = ''
     $scope.files = ''
@@ -41,9 +37,8 @@ app.controller 'mainCtrl', ['$scope', '$httpBackend',
         $scope.currDir = ''
       $scope.files = getTargetDirFiles $scope.data
 
-    $httpBackend 'GET', '/dir', null, (status, data) ->
-      data = angular.fromJson data
+    $http.get('/dir').success (data) ->
       $scope.data = data.files
       $scope.target = data.target.split('/').pop()
-      $scope.$broadcast 'data'
+      $scope.updatePathVars $routeParams.dir
 ]
