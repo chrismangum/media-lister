@@ -54,6 +54,6 @@ module.exports = function(grunt) {
     }
   });
   grunt.registerTask('default', ['compile', 'concurrent:default']);
-  grunt.registerTask('compile', ['uglify:minify', 'coffee:compile']);
+  grunt.registerTask('compile', ['coffee:compile', 'uglify:minify']);
   grunt.registerTask('lint', ['jshint']);
 };
