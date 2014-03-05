@@ -12,7 +12,7 @@ app.config ['$routeProvider', ($routeProvider) ->
 app.controller 'tmpCtrl', ['$scope', ($scope) ->
   if $scope.data
     $scope.updatePathVars()
-    $scope.files = $scope.parseData($scope.data)
+    $scope.files = $scope.parseData $scope.data
 ]
 
 app.controller 'mainCtrl', ['$scope', '$http', '$routeParams'
@@ -27,9 +27,10 @@ app.controller 'mainCtrl', ['$scope', '$http', '$routeParams'
       $scope.breadcrumbs = if $rp.dir then $rp.dir.split '/' else []
       $scope.currDir = if $rp.dir then '/' + $rp.dir else ''
 
-    $http.get('/dir').success (data) ->
+    $http.get('/dir').then (response) ->
+      data = response.data
       $scope.data = data.files
       $scope.target = data.target.split('/').pop()
       $scope.updatePathVars()
-      $scope.files = $scope.parseData($scope.data)
+      $scope.files = $scope.parseData $scope.data
 ]
