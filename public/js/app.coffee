@@ -23,7 +23,7 @@ app.controller 'mainCtrl', ['$scope', '$http', '$routeParams'
         files = files[item].children
       files
 
-    $scope.updatePathVars = () ->
+    $scope.updatePathVars = ->
       $scope.breadcrumbs = if $rp.dir then $rp.dir.split '/' else []
       $scope.currDir = if $rp.dir then '/' + $rp.dir else ''
 
