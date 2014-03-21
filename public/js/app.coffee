@@ -2,7 +2,7 @@ app = angular.module 'app', ['ngRoute']
 
 app.config ['$routeProvider', ($routeProvider) ->
   routeObj =
-    templateUrl: '/static/template.html'
+    template: '<ul ng-include="\'item.html\'"></ul>'
     controller: 'tmpCtrl'
   $routeProvider
     .when '/:dir*', routeObj
