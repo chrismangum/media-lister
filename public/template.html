@@ -1,13 +1,4 @@
-<ul class="breadcrumbs">
-  <li><a href="/">{{target}}</a></li>
-  <li ng-repeat="bc in breadcrumbs">
-    <span>&nbsp;&raquo; </span>
-    <a ng-href="#/{{breadcrumbs.slice(0, $index + 1).join('/')}}">{{bc}}</a>
-  <li>
-</ul>
-<hr>
 <ul ng-include="'item.html'"></ul>
-
 <script type="text/ng-template" id="item.html">
   <li ng-repeat="(name, file) in files" ng-init="show = false">
     <a ng-click="show = !show"><img ng-if="file.type === 'directory'" ng-src="/static/images/arrow_{{show && 'd' || 'r'}}.png" /></a>

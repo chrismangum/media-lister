@@ -19,6 +19,14 @@
     </style>
   </head>
   <body ng-controller="mainCtrl">
+    <ul class="breadcrumbs">
+      <li><a href="/">{{target}}</a></li>
+      <li ng-repeat="bc in breadcrumbs">
+        <span>&nbsp;&raquo; </span>
+        <a ng-href="#/{{breadcrumbs.slice(0, $index + 1).join('/')}}">{{bc}}</a>
+      <li>
+    </ul>
+    <hr>
     <div ng-view></div>
     <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
     <script src="/static/vendor/angular/angular.min.js"></script>
