@@ -1,4 +1,3 @@
 public/vendor
 *.min.js
-*.js
 target
