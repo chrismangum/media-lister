@@ -3,35 +3,22 @@
   <head>
     <title></title>
     <meta charset="utf-8" />
-    <style>
-      body { font-family: Helvetica, sans-serif; line-height: 1.7em; background-color: #333; color: #fff;}
-      ul {padding-left: 30px;}
-      li { list-style-type: none; }
-      img.dir { padding: 0 10px; cursor: pointer; }
-      span { color: #f00; }
-      a { text-decoration: none; color: #fff; }
-      a:hover { text-decoration: underline; }
-      a:visited { color: #fff; }
-      a.mp4:visited, a.m4v:visited { color: #888; }
-      .breadcrumbs {overflow: hidden; margin: 5px 0}
-      hr {clear: both}
-      .breadcrumbs li {float: left;}
-    </style>
+    <link rel="stylesheet" href="/static/css/style.css">
   </head>
   <body ng-controller="mainCtrl">
     <ul class="breadcrumbs">
-      <li><a href="/">{{target}}</a></li>
+      <li><a href="/">{{ target }}</a></li>
       <li ng-repeat="bc in breadcrumbs">
         <span>&nbsp;&raquo; </span>
-        <a ng-href="#/{{breadcrumbs.slice(0, $index + 1).join('/')}}">{{bc}}</a>
+        <a ng-href="#/{{ breadcrumbs.slice(0, $index + 1).join('/') }}">{{ bc }}</a>
       <li>
     </ul>
     <hr>
     <div ng-view></div>
     <script type="text/ng-template" id="item.html">
       <li ng-repeat="(name, file) in files" ng-init="show = false">
-        <a ng-click="show = !show"><img ng-if="file.type === 'directory'" ng-src="/static/images/arrow_{{show && 'd' || 'r'}}.png" /></a>
-        <a ng-href="{{file.type === 'file' && '/target' || '#'}}{{currDir + '/' + name}}">{{name}}</a>
+        <a ng-click="show = !show"><img ng-if="file.type === 'directory'" ng-src="/static/images/arrow_{{ show && 'd' || 'r' }}.png" /></a>
+        <a ng-href="{{ file.type === 'file' && '/target' || '#' }}{{ currDir + '/' + name }}">{{ name }}</a>
         <ul ng-if="show && file.children" ng-include="'item.html'" ng-init="files = file.children; currDir = currDir + '/' + name"></ul>
       </li>
     </script>

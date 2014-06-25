@@ -4,6 +4,7 @@ var gulp = require('gulp'),
   });
 
 var paths = {
+  stylus: 'public/css/*.styl',
   js: 'public/js/*.coffee'
 };
 
@@ -12,6 +13,15 @@ gulp.task('scripts', function () {
     .pipe(plugin.coffee())
     .pipe(plugin.uglify())
     .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('stylus', function () {
+  gulp.src(paths.stylus)
+    .pipe(plugin.stylus({
+      set: ['compress'],
+      use: ['nib']
+    }))
+    .pipe(gulp.dest('public/css'));
 });
 
 gulp.task('nodemon', function () {
@@ -24,6 +34,7 @@ gulp.task('nodemon', function () {
 
 gulp.task('watch', function () {
   gulp.watch(paths.js, ['scripts']);
+  gulp.watch(paths.stylus, ['stylus']);
 });
 
-gulp.task('default', ['scripts', 'watch', 'nodemon']);
+gulp.task('default', ['scripts', 'stylus', 'watch', 'nodemon']);
