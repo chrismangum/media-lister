@@ -4,8 +4,9 @@ var gulp = require('gulp'),
   });
 
 var paths = {
-  stylus: 'public/css/*.styl',
-  js: 'public/js/*.coffee'
+  js: 'public/js/*.coffee',
+  jade: 'views/*.jade',
+  stylus: 'public/css/*.styl'
 };
 
 gulp.task('scripts', function () {
@@ -13,6 +14,14 @@ gulp.task('scripts', function () {
     .pipe(plugin.coffee())
     .pipe(plugin.uglify())
     .pipe(gulp.dest('public/js'));
+});
+
+gulp.task('jade', function () {
+  gulp.src(paths.jade)
+    .pipe(plugin.jade({
+      pretty: true
+    }))
+    .pipe(gulp.dest('public/'));
 });
 
 gulp.task('stylus', function () {
@@ -34,7 +43,8 @@ gulp.task('nodemon', function () {
 
 gulp.task('watch', function () {
   gulp.watch(paths.js, ['scripts']);
+  gulp.watch(paths.jade, ['jade']);
   gulp.watch(paths.stylus, ['stylus']);
 });
 
-gulp.task('default', ['scripts', 'stylus', 'watch', 'nodemon']);
+gulp.task('default', ['scripts', 'jade', 'stylus', 'watch', 'nodemon']);
