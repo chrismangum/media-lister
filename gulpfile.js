@@ -1,8 +1,7 @@
 var gulp = require('gulp'),
-  coffee = require('gulp-coffee'),
-  uglify = require('gulp-uglify'),
-  concat = require('gulp-concat'),
-  nodemon = require('gulp-nodemon');
+  plugin = require('gulp-load-plugins')({
+    camelize: true
+  });
 
 var paths = {
   js: 'public/js/*.coffee'
@@ -10,14 +9,13 @@ var paths = {
 
 gulp.task('scripts', function () {
   return gulp.src(paths.js)
-    .pipe(coffee())
-    .pipe(uglify())
-    .pipe(concat('app.min.js'))
+    .pipe(plugin.coffee())
+    .pipe(plugin.uglify())
     .pipe(gulp.dest('public/js'));
 });
 
 gulp.task('nodemon', function () {
-  nodemon({
+  plugin.nodemon({
     script: 'server/app.js',
     ext: 'js,coffee',
     ignore: ['public/**', 'node_modules/**']
