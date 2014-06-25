@@ -19,9 +19,11 @@
       <ul ng-if="show && file.children" ng-include="'item.html'" ng-init="files = file.children; currDir = currDir + '/' + name"></ul>
       </li>
     </script>
-    <script src="/static/vendor/jquery/dist/jquery.min.js"></script>
-    <script src="/static/vendor/angular/angular.min.js"></script>
-    <script src="/static/vendor/angular-route/angular-route.min.js"></script>
+    <!--bower:js-->
+    <script src="/static/vendor/jquery/dist/jquery.js"></script>
+    <script src="/static/vendor/angular/angular.js"></script>
+    <script src="/static/vendor/angular-route/angular-route.js"></script>
+    <!--endbower-->
     <script src="/static/js/app.js"></script>
   </body>
 </html>
