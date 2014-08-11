@@ -8,7 +8,7 @@
   <body ng-controller="mainCtrl">
     <ul class="breadcrumbs">
       <li><a href="/">{{ target }}</a></li>
-      <li ng-repeat="bc in breadcrumbs"><span>&raquo;&nbsp;</span><a ng-href="#/{{ breadcrumbs.slice(0, $index + 1).join('/') }}">{{ bc }}</a></li>
+      <li ng-repeat="bc in breadcrumbs">&nbsp;<span>&raquo;</span>&nbsp;<a ng-href="#/{{ breadcrumbs.slice(0, $index + 1).join('/') }}">{{ bc }}</a></li>
     </ul>
     <hr>
     <div ng-view="ng-view"></div>
@@ -23,6 +23,7 @@
     <script src="/static/vendor/jquery/dist/jquery.js"></script>
     <script src="/static/vendor/angular/angular.js"></script>
     <script src="/static/vendor/angular-route/angular-route.js"></script>
+    <script src="/static/vendor/lodash/dist/lodash.compat.js"></script>
     <!--endbower-->
     <script src="/static/js/app.js"></script>
   </body>

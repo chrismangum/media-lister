@@ -9,7 +9,9 @@ html(ng-app='app')
       li
         a(href='/') {{ target }}
       li(ng-repeat='bc in breadcrumbs')
-        span &raquo;&nbsp;
+        &nbsp;
+        span &raquo;
+        &nbsp;
         a(ng-href='#/{{ breadcrumbs.slice(0, $index + 1).join(\'/\') }}') {{ bc }}
     hr
     div(ng-view='ng-view')
