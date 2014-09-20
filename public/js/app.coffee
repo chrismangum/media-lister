@@ -19,8 +19,8 @@ app.controller 'mainCtrl', ['$scope', '$http', '$routeParams'
   ($scope, $http, $rp) ->
 
     $scope.getFiles = ->
-      _.reduce $scope.breadcrumbs, ((files, item) ->
-        files[item].children
+      _.reduce $scope.breadcrumbs, ((files, name) ->
+        _.findWhere(files, name: name).children
       ), $scope.data
 
     $scope.updatePathVars = ->

@@ -2,7 +2,7 @@ var express = require('express'),
   http = require('http'),
   path = require('path'),
   fs = require('fs'),
-  scanDir = require('./scanDir'),
+  _ = require('lodash'),
   app = express();
 
 var target;
@@ -17,12 +17,21 @@ app.use('/target', express.static(target));
 app.get('/dir', function (req, res) {
   res.json({
     target: target,
-    files: scanDir.scan(target + '/')
+    files: scanDir(target + '/')
   });
 });
-app.get('*', function (req, res) {
+app.get('/', function (req, res) {
   res.sendfile(path.join(__dirname, "../public/index.html"));
 });
 
 http.createServer(app).listen(3000);
 
+function scanDir(path) {
+  return _.map(fs.readdirSync(path), function (name) {
+    var item = {name: name};
+    if (fs.statSync(path + name).isDirectory()) {
+      item.children = scanDir(path + name + '/');
+    }
+    return item;
+  });
+}
