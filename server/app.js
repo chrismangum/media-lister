@@ -5,10 +5,7 @@ var express = require('express'),
   _ = require('lodash'),
   app = express();
 
-var target;
-process.chdir(path.join(__dirname, '../target'));
-target = process.cwd();
-process.chdir(__dirname);
+var target = fs.readlinkSync('../target');
 
 app.use(express.logger('dev'));
 app.set('json spaces', 0);
