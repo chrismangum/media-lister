@@ -5,18 +5,18 @@ http = require 'http'
 path = require 'path'
 
 app = express()
-target = fs.readlinkSync '../target'
+target = fs.readlinkSync 'target'
 
 app.use express.logger 'dev'
 app.set 'json spaces', 0
-app.use '/static', express.static path.join __dirname, '../public'
+app.use '/static', express.static 'public'
 app.use '/target', express.static target
 app.get '/dir', (req, res) ->
   res.json
     target: target,
     files: scanDir target + '/'
 app.get '/', (req, res) ->
-  res.sendfile path.join __dirname, "../public/index.html"
+  res.sendfile 'public/index.html'
 
 http.createServer(app).listen 3000
 
